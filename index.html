@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solicitação de Serviços</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f6f9;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 0.9rem;
+        }
+
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        textarea {
+            resize: vertical;
+            height: 100px;
+        }
+
+        .services-group {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .checkbox-label input {
+            margin-right: 10px;
+            width: 16px;
+            height: 16px;
+        }
+
+        .btn-whatsapp {
+            width: 100%;
+            background-color: #25d366;
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: background-color 0.2s;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebc57;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>SOLICITAÇÃO DE MANUTENÇÃO PARA AS OBRAS</h2>
+
+    <form id="requerimentoForm">
+        <div class="form-group">
+            <label for="nome">NOME:</label>
+            <input type="text" id="nome" required placeholder="Digite seu nome completo">
+        </div>
+
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" required placeholder="000.000.000-00">
+        </div>
+        
+           <div class="form-group">
+            <label for="cpf">TELEFONE:</label>
+            <input type="text" id="telefone" required placeholder="(51) 99999-9999">
+        </div>
+
+        <div class="form-group">
+            <label for="endereco">ENDEREÇO:</label>
+            <input type="text" id="endereco" required placeholder="Rua, número, bairro">
+        </div>
+
+        <div class="form-group">
+            <label for="complemento">COMPLEMENTO:</label>
+            <input type="text" id="complemento" placeholder="Apto, bloco, ponto de referência (opcional)">
+        </div>
+
+        <div class="form-group">
+            <label>SELECIONE O SERVIÇO:</label>
+            <div class="services-group">
+                <label class="checkbox-label"><input type="checkbox" name="servico" value="Limpeza urbana"> Limpeza urbana</label>
+                <label class="checkbox-label"><input type="checkbox" name="servico" value="Construção civil"> Construção civil</label>
+                <label class="checkbox-label"><input type="checkbox" name="servico" value="Sinalização viária (pintura de placas)"> Sinalização viária (pintura de placas)</label>
+                <label class="checkbox-label"><input type="checkbox" name="servico" value="Saneamento básico"> Saneamento básico</label>
+                <label class="checkbox-label"><input type="checkbox" name="servico" value="Serralheria"> Serralheria</label>
+                <label class="checkbox-label"><input type="checkbox" name="servico" value="Carpintaria"> Carpintaria</label>
+                <label class="checkbox-label"><input type="checkbox" name="servico" value="Operação de máquinas"> Operação de máquinas</label>
+                <label class="checkbox-label"><input type="checkbox" name="servico" value="Iluminação pública"> Iluminação pública</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">DESCRIÇÃO DA SOLICITAÇÃO:</label>
+            <textarea id="descricao" required placeholder="Descreva os detalhes da sua solicitação..."></textarea>
+        </div>
+
+        <button type="button" class="btn-whatsapp" onclick="enviarWhatsapp()">
+            Enviar via WhatsApp
+        </button>
+    </form>
+</div>
+
+<script>
+    function enviarWhatsapp() {
+        // Insira o número do destinatário abaixo com código do país (55) + DDD + número (ex: 5551999999999)
+        // Deixe vazio '' se quiser que o usuário escolha o contato na hora de enviar
+        const numeroTelefone = ""; 
+
+        const nome = document.getElementById("nome").value;
+        const cpf = document.getElementById("cpf").value;
+        const telefone = document.getElementById("cpf").value;
+        const endereco = document.getElementById("endereco").value;
+        const complemento = document.getElementById("complemento").value;
+        const descricao = document.getElementById("descricao").value;
+
+        // Coleta todos os serviços selecionados
+        const servicosCheckboxes = document.querySelectorAll('input[name="servico"]:checked');
+        let servicosSelecionados = [];
+        servicosCheckboxes.forEach((checkbox) => {
+            servicosSelecionados.push(checkbox.value);
+        });
+
+        // Validação simples dos campos obrigatórios
+        if (!nome || !cpf || !telefone || !endereco || servicosSelecionados.length === 0 || !descricao) {
+            alert("Por favor, preencha todos os campos obrigatórios e selecione pelo menos um serviço.");
+            return;
+        }
+
+        // Formatação do texto da mensagem
+        let mensagem = `*SOLICITAÇÃO DE MANUTENÇÃO PARA AS OBRAS*\n\n`;
+        mensagem += `*NOME:* ${nome}\n`;
+        mensagem += `*CPF:* ${cpf}\n`;
+        mensagem += `*TELEFONE:* ${telefone}\n`;
+        mensagem += `*ENDEREÇO:* ${endereco}\n`;
+        mensagem += `*COMPLEMENTO:* ${complemento || "N/A"}\n\n`;
+        mensagem += `*SERVIÇO(S) SELECIONADO(S):*\n`;
+        servicosSelecionados.forEach(servico => {
+            mensagem += `- ${servico}\n`;
+        });
+        mensagem += `\n*DESCRIÇÃO DA SOLICITAÇÃO:*\n${descricao}`;
+
+        // Codifica o texto para URL
+        const mensagemFormatada = encodeURIComponent(mensagem);
+
+        // Monta a URL de envio do WhatsApp
+        let url = "";
+        if (numeroTelefone) {
+            url = `https://api.whatsapp.com/send?phone=${numeroTelefone}&text=${mensagemFormatada}`;
+        } else {
+            url = `https://api.whatsapp.com/send?text=${mensagemFormatada}`;
+        }
+
+        // Abre em uma nova aba/aplicativo
+        window.open(url, "_blank");
+    }
+</script>
+
+</body>
+</html>
