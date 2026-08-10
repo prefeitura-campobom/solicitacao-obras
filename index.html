@@ -188,17 +188,17 @@
         }
 
         // Formatação do texto da mensagem
-        let mensagem = `*SOLICITAÇÃO DE MANUTENÇÃO PARA AS OBRAS*\n\n`;
-        mensagem += `*NOME:* ${nome}\n`;
-        mensagem += `*CPF:* ${cpf}\n`;
-        mensagem += `*TELEFONE:* ${telefone}\n`;
-        mensagem += `*ENDEREÇO:* ${endereco}\n`;
-        mensagem += `*COMPLEMENTO:* ${complemento || "N/A"}\n\n`;
-        mensagem += `*SERVIÇO(S) SELECIONADO(S):*\n`;
+        let mensagem = `SOLICITAÇÃO DE MANUTENÇÃO PARA AS OBRAS\n\n`;
+        mensagem += `NOME: ${nome}\n`;
+        mensagem += `CPF: ${cpf}\n`;
+        mensagem += `TELEFONE: ${telefone}\n`;
+        mensagem += `ENDEREÇO: ${endereco}\n`;
+        mensagem += `COMPLEMENTO: ${complemento || "N/A"}\n\n`;
+        mensagem += `SERVIÇO(S) SELECIONADO(S):\n`;
         servicosSelecionados.forEach(servico => {
             mensagem += `- ${servico}\n`;
         });
-        mensagem += `\n*DESCRIÇÃO DA SOLICITAÇÃO:*\n${descricao}`;
+        mensagem += `\nDESCRIÇÃO DA SOLICITAÇÃO:\n${descricao}`;
 
         // Codifica o texto para URL
         const mensagemFormatada = encodeURIComponent(mensagem);
